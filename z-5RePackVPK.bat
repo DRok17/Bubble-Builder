@@ -9,7 +9,7 @@ IF EXIST .\vpk\input\%id%\sce_sys\livearea\contents\bg.png (
     ren bg0.png bg.png
     copy "bg.png" ".\vpk\input\%id%\sce_sys\livearea\contents\"
     cd .\1batch
-    start template-bg-OUT.bat
+    start /min template-bg-OUT.bat
     cd ..
   ) ELSE (
     GOTO NEXT1
@@ -19,7 +19,7 @@ IF EXIST .\vpk\input\%id%\sce_sys\livearea\contents\bg0.png (
     ren bg.png bg0.png
     copy "bg0.png" ".\vpk\input\%id%\sce_sys\livearea\contents\"
     cd .\1batch
-    start template-bg0-OUT.bat
+    start /min template-bg0-OUT.bat
     cd ..
   ) ELSE (
     GOTO NEXT2
@@ -28,7 +28,7 @@ IF EXIST .\vpk\input\%id%\sce_sys\livearea\contents\bg0.png (
 IF EXIST .\vpk\input\%id%\sce_sys\livearea\contents\default_gate.png (
     del .\vpk\input\%id%\sce_sys\livearea\contents\default_gate.png
     cd .\1batch
-    start template-gate-OUT.bat
+    start /min template-gate-OUT.bat
     cd ..
   ) ELSE (
     GOTO NEXT3
@@ -45,6 +45,7 @@ copy "bg0.png" ".\vpk\input\%id%\sce_sys\livearea\contents\"
 copy "startup.png" ".\vpk\input\%id%\sce_sys\livearea\contents\"
 copy "icon0.png" ".\vpk\input\%id%\sce_sys\"
 copy "pic0.png" ".\vpk\input\%id%\sce_sys\"
+copy "boot.png" ".\vpk\input\%id%\data\"
 rmdir /S /Q ".\vpk\input\%id%\sce_sys\package"
 @ECHO OFF
 mode 50,12
@@ -62,6 +63,7 @@ ECHO.
 timeout 3 >nul
 GOTO ZIP
 :ZIP
+
 copy "template.xml" ".\vpk\input\%id%\sce_sys\livearea\contents\"
 @echo off
 IF EXIST .\param.sfo (
@@ -72,6 +74,7 @@ IF EXIST .\param.sfo (
   )
 :NEXT5
 ren ".\vpk\output\*.zip" "*.vpk"
+ren bg0.png bg.png
 copy ".\vpk\output\*.vpk" ".\vpk\archive\"
 %SystemRoot%\explorer.exe ".\vpk\output\"
 del .\list.txt

@@ -1,42 +1,39 @@
 @echo off
-copy "bg.bmp" ".\backup"
-copy "bg.jpg" ".\backup"
-copy "bg.jpeg" ".\backup"
-copy "bg.jfif" ".\backup"
-copy "bg.tiff" ".\backup"
-copy "icon0.bmp" ".\backup"
-copy "icon0.jpg" ".\backup"
-copy "icon0.jpeg" ".\backup"
-copy "icon0.jfif" ".\backup"
-copy "icon0.tiff" ".\backup"
-copy "startup.bmp" ".\backup"
-copy "startup.jpg" ".\backup"
-copy "startup.jpeg" ".\backup"
-copy "startup.jfif" ".\backup"
-copy "startup.tiff" ".\backup"
-copy "pic0.bmp" ".\backup"
-copy "pic0.jpg" ".\backup"
-copy "pic0.jpeg" ".\backup"
-copy "pic0.jfif" ".\backup"
-copy "pic0.tiff" ".\backup"
+dir .\vpk\input /a:d /b > list.txt
+set /p id=< .\list.txt
 
-
-
-@echo off
 call scale.bat -source bg.png -target bg1.png -max-height 540 -max-width 960 -keep-ratio no -force yes
 call scale.bat -source icon0.png -target icon01.png -max-height 128 -max-width 128 -keep-ratio no -force yes
 call scale.bat -source startup.png -target startup1.png -max-height 158 -max-width 280 -keep-ratio no -force yes
 call scale.bat -source pic0.png -target pic01.png -max-height 544 -max-width 960 -keep-ratio no -force yes
+
+
+IF EXIST .\vpk\input\%id%\data\boot.bin (
+    composite startup1.png -gravity south psp.png startup2.png
+    call scale.bat -source pic0.png -target boot.png -max-height 272 -max-width 480 -keep-ratio no -force yes
+  ) ELSE (
+    GOTO NEXT
+  )
+:NEXT
 
 @echo off
 del bg.png
 del icon0.png
 del startup.png
 del pic0.png
+del psp.png
 ren bg1.png bg.png
 ren icon01.png icon0.png
-ren startup1.png startup.png
+IF EXIST .\vpk\input\%id%\data\boot.bin (
+    del startup1.png
+    ren startup2.png startup.png
+  ) ELSE (
+    ren startup1.png startup.png
+    GOTO NEXT2
+  )
+:NEXT2
 ren pic01.png pic0.png
+del startup1.png
 
 @echo off
 del "bg.bmp"
@@ -59,4 +56,5 @@ del "pic0.jpg"
 del "pic0.jpeg"
 del "pic0.jfif"
 del "pic0.tiff"
+del .\list.txt
 exit
