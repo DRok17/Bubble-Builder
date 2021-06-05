@@ -70,9 +70,9 @@ IF EXIST .\param.sfo (
     7z.exe a .\vpk\output\"%sfo%".zip ".\vpk\input\%id%\*"
   ) ELSE (
     7z.exe a .\vpk\output\"%id%".zip ".\vpk\input\%id%\*"
-    GOTO NEXT5
+    GOTO NEXT6
   )
-:NEXT5
+:NEXT6
 ren ".\vpk\output\*.zip" "*.vpk"
 ren bg0.png bg.png
 copy ".\vpk\output\*.vpk" ".\vpk\archive\"

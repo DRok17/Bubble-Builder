@@ -16,6 +16,14 @@ IF EXIST .\vpk\input\%id%\data\boot.bin (
   )
 :NEXT
 
+IF EXIST .\pic0.png (
+    GOTO NEXT5
+  ) ELSE (
+    call scale.bat -source bg.png -target boot.png -max-height 272 -max-width 480 -keep-ratio no -force yes
+    call scale.bat -source bg1.png -target pic01.png -max-height 544 -max-width 960 -keep-ratio no -force yes
+  )
+:NEXT5
+
 @echo off
 del bg.png
 del icon0.png
