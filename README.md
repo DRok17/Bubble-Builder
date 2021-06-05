@@ -1,5 +1,9 @@
 # Bubble-Builder
 
+***HOMEBREW APPS AND ADRENALINE BUBBLES ONLY***
+
+***OFFICIAL VITA APPS NOT SUPPORTED DUE TO DRM***
+
 Bubble-Builder is a total VPK re-packaging tool for Homebrew and Adrenaline Bubble Booter assets. PNGs, Title and IDs can now all be modified with ease on WIndows 10 PCs.
 
 Simply copy the Vita App of choice from ux0:app/ folder to VPK/Input, download the required images to Input folder, and title/ID as needed. New VPK can then be generated and installed on the Vita.
