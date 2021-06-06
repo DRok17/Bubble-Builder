@@ -26,7 +26,7 @@ IF EXIST .\vpk\input\%id%\sce_sys\livearea\contents\bg0.png (
   )
 :NEXT2
 IF EXIST .\vpk\input\%id%\sce_sys\livearea\contents\default_gate.png (
-    del .\vpk\input\%id%\sce_sys\livearea\contents\default_gate.png
+    ren ".\vpk\input\%id%\sce_sys\livearea\contents\default_gate.png" "startup.png"
     cd .\1batch
     start /min template-gate-OUT.bat
     cd ..

@@ -27,8 +27,18 @@ IF EXIST .\txt\id.txt (
   )
 :BUBID
 @set /p id="Title ID (9 char MAX [CAPS or #]): "
+SET /P AREYOUSURE=Does VPK Require Data Folder? (Y/[N])? 
+IF /I "%AREYOUSURE%" NEQ "N" GOTO ATT2
+
 @echo|set /p="%title%"> ".\txt\name.txt"
 @echo|set /p="%id%"> ".\txt\id.txt"
 vita-mksfoex -s TITLE_ID=%id% "%title%" param.sfo
+copy "param.sfo" ".."
+exit
+
+:ATT2
+@echo|set /p="%title%"> ".\txt\name.txt"
+@echo|set /p="%id%"> ".\txt\id.txt"
+vita-mksfoex -s TITLE_ID=%id% "%title%" -d ATTRIBUTE2=12 param.sfo
 copy "param.sfo" ".."
 exit
