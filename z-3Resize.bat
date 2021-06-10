@@ -10,19 +10,11 @@ call scale.bat -source pic0.png -target pic01.png -max-height 544 -max-width 960
 
 IF EXIST .\vpk\input\%id%\data\boot.bin (
     composite startup1.png -gravity south psp.png startup2.png
-    call scale.bat -source pic0.png -target boot.png -max-height 272 -max-width 480 -keep-ratio no -force yes
+    call scale.bat -source pic0.png -target boot1.png -max-height 272 -max-width 480 -keep-ratio no -force yes
   ) ELSE (
     GOTO NEXT
   )
 :NEXT
-
-IF EXIST .\pic0.png (
-    GOTO NEXT5
-  ) ELSE (
-    call scale.bat -source bg.png -target boot.png -max-height 272 -max-width 480 -keep-ratio no -force yes
-    call scale.bat -source bg1.png -target pic01.png -max-height 544 -max-width 960 -keep-ratio no -force yes
-  )
-:NEXT5
 
 @echo off
 del bg.png
@@ -35,11 +27,31 @@ ren icon01.png icon0.png
 IF EXIST .\vpk\input\%id%\data\boot.bin (
     del startup1.png
     ren startup2.png startup.png
+    ren boot1.png boot.png
   ) ELSE (
     ren startup1.png startup.png
     GOTO NEXT2
   )
 :NEXT2
+IF EXIST .\boot.png (
+    GOTO NEXT5
+  ) ELSE (
+    GOTO NEXT3
+  )
+:NEXT3
+IF EXIST .\vpk\input\%id%\data\boot.bin (
+    GOTO NEXT4
+  ) ELSE (
+    GOTO NEXT5
+  )
+:NEXT4
+IF EXIST .\pic0.png (
+    GOTO NEXT5
+  ) ELSE (
+    copy ".\1batch\boot.png" "."
+    GOTO NEXT5
+  )
+:NEXT5
 ren pic01.png pic0.png
 del startup1.png
 
